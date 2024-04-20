@@ -50,7 +50,7 @@ diesel::table! {
     payment (id) {
         id -> Integer,
         amount -> Double,
-        month -> Double,
+        month -> Integer,
         year -> Integer,
         employee_id -> Integer,
     }
@@ -62,11 +62,11 @@ diesel::table! {
         name -> Text,
         email -> Text,
         phone -> Text,
-        cnpj -> Nullable<Text>,
-        company_name -> Nullable<Text>,
-        state_registration -> Nullable<Text>,
+        cnpj -> Text,
+        company_name -> Text,
+        state_registration -> Text,
         address_id -> Integer,
-        bank_reference -> Nullable<Text>,
+        bank_reference -> Text,
     }
 }
 
