@@ -22,6 +22,14 @@ pub fn get_provider(conn: &mut SqliteConnection, provider_id: i32) -> Result<Opt
         .map_err(|_| "Error loading an provider")
 }
 
+pub fn get_providers(conn: &mut SqliteConnection) -> Result<Vec<Provider>, &'static str> {
+    use crate::schema::provider::dsl::*;
+
+    provider.select(Provider::as_select())
+        .load(conn)
+        .map_err(|_| "Error loading providers")
+}
+
 pub fn update_provider(conn: &mut SqliteConnection, provider_id: i32, _provider: &UpdateProvider) -> Result<Provider, &'static str> {
     use crate::schema::provider::dsl::*;
 
@@ -31,6 +39,7 @@ pub fn update_provider(conn: &mut SqliteConnection, provider_id: i32, _provider:
         .map_err(|_| "Error updating an provider")
 }
 
+
 pub fn delete_provider(conn: &mut SqliteConnection, provider_id: i32) -> Result<bool, &'static str> {
     use crate::schema::provider::dsl::*;
 
@@ -38,4 +47,13 @@ pub fn delete_provider(conn: &mut SqliteConnection, provider_id: i32) -> Result<
         .execute(conn)
         .map(|rows_deleted| rows_deleted == 1)
         .map_err(|_| "Error deleting an provider")
+}
+
+pub fn remove_provider_address(conn: &mut SqliteConnection, provider_id: i32) -> Result<Provider, &'static str> {
+    use crate::schema::provider::dsl::*;
+
+    diesel::update(provider.find(provider_id))
+        .set(address_id.eq(None::<i32>))
+        .get_result::<Provider>(conn)
+        .map_err(|_| "Error removing provider address")
 }

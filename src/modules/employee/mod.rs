@@ -39,3 +39,13 @@ pub fn delete_employee(conn: &mut SqliteConnection, employee_id: i32) -> Result<
         .map(|rows_deleted| rows_deleted == 1)
         .map_err(|_| "Error deleting an employee")
 }
+
+pub fn get_employee_by_user_id(conn: &mut SqliteConnection, user_id_param: i32) -> Result<Option<Employee>, &'static str> {
+    use crate::schema::employee::dsl::*;
+
+    employee.filter(user_id.eq(user_id_param))
+        .select(Employee::as_select())
+        .first(conn)
+        .optional()
+        .map_err(|_| "Error loading employee by user ID")
+}

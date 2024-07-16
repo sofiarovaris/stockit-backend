@@ -12,104 +12,149 @@ diesel::table! {
 }
 
 diesel::table! {
-    client (id) {
+    client_user (id) {
         id -> Integer,
-        name -> Text,
-        email -> Text,
-        phone -> Text,
-        cell -> Text,
+        name -> Nullable<Text>,
+        email -> Nullable<Text>,
+        phone -> Nullable<Text>,
+        state_registration -> Nullable<Text>,
         cpf -> Nullable<Text>,
         cnpj -> Nullable<Text>,
-        #[sql_name = "type"]
-        type_ -> Text,
+        client_type -> Nullable<Text>,
         company_name -> Nullable<Text>,
         rg -> Nullable<Text>,
-        address_id -> Integer,
-    }
-}
-
-diesel::table! {
-    comission_history (id) {
-        id -> Integer,
-        comission -> Double,
-        date -> Date,
-        employee_id -> Integer,
+        address_id -> Nullable<Integer>,
+        number -> Nullable<Integer>,
+        complement -> Nullable<Text>,
     }
 }
 
 diesel::table! {
     employee (id) {
         id -> Integer,
-        admission_date -> Date,
-        payment_date -> Date,
+        admission_date -> Nullable<Date>,
+        payment_date -> Nullable<Date>,
+        salary -> Nullable<Double>,
+        comission -> Nullable<Double>,
         user_id -> Integer,
     }
 }
 
 diesel::table! {
-    payment (id) {
+    producer (id) {
         id -> Integer,
-        amount -> Double,
-        month -> Integer,
-        year -> Integer,
-        employee_id -> Integer,
+        name -> Text,
+    }
+}
+
+diesel::table! {
+    product (id) {
+        id -> Integer,
+        name -> Nullable<Text>,
+        code -> Nullable<Text>,
+        observations -> Nullable<Text>,
+        gross_weight -> Nullable<Double>,
+        net_weight -> Nullable<Double>,
+        batch_number -> Nullable<Text>,
+        current_quantity -> Nullable<Integer>,
+        provider_id -> Integer,
+        producer_id -> Integer,
+        unit_id -> Integer,
+    }
+}
+
+diesel::table! {
+    product_nfe (id) {
+        id -> Integer,
+        calculation_basis -> Nullable<Double>,
+        icms_intern -> Nullable<Double>,
+        ipi -> Nullable<Double>,
+        origin -> Nullable<Text>,
+        cest -> Nullable<Double>,
+        ncm -> Nullable<Double>,
+        csosn -> Nullable<Double>,
+        product_id -> Integer,
+    }
+}
+
+diesel::table! {
+    product_price (id) {
+        id -> Integer,
+        price_cost -> Nullable<Double>,
+        sale_price -> Nullable<Double>,
+        profit_margin -> Nullable<Double>,
+        product_id -> Integer,
     }
 }
 
 diesel::table! {
     provider (id) {
         id -> Integer,
-        name -> Text,
-        email -> Text,
-        phone -> Text,
-        cnpj -> Text,
-        company_name -> Text,
-        state_registration -> Text,
-        address_id -> Integer,
-        bank_reference -> Text,
+        name -> Nullable<Text>,
+        company_name -> Nullable<Text>,
+        state_registration -> Nullable<Text>,
+        email -> Nullable<Text>,
+        phone -> Nullable<Text>,
+        cnpj -> Nullable<Text>,
+        bank_reference -> Nullable<Text>,
+        address_id -> Nullable<Integer>,
+        number -> Nullable<Integer>,
+        complement -> Nullable<Text>,
     }
 }
 
 diesel::table! {
-    salary_history (id) {
+    role (id) {
         id -> Integer,
-        salary -> Double,
-        date -> Date,
-        employee_id -> Integer,
+        name -> Text,
+    }
+}
+
+diesel::table! {
+    unit (id) {
+        id -> Integer,
+        name -> Text,
     }
 }
 
 diesel::table! {
     user (id) {
         id -> Integer,
-        name -> Text,
-        email -> Text,
-        rg -> Text,
-        cpf -> Text,
-        phone -> Text,
-        username -> Text,
+        name -> Nullable<Text>,
+        username -> Nullable<Text>,
         password -> Text,
-        number -> Integer,
+        email -> Text,
+        rg -> Nullable<Text>,
+        cpf -> Nullable<Text>,
+        phone -> Nullable<Text>,
+        number -> Nullable<Text>,
         complement -> Nullable<Text>,
-        address_id -> Integer,
+        role_id -> Nullable<Integer>,
+        address_id -> Nullable<Integer>,
     }
 }
 
-diesel::joinable!(client -> address (address_id));
-diesel::joinable!(comission_history -> employee (employee_id));
+diesel::joinable!(client_user -> address (address_id));
 diesel::joinable!(employee -> user (user_id));
-diesel::joinable!(payment -> employee (employee_id));
+diesel::joinable!(product -> producer (producer_id));
+diesel::joinable!(product -> provider (provider_id));
+diesel::joinable!(product -> unit (unit_id));
+diesel::joinable!(product_nfe -> product (product_id));
+diesel::joinable!(product_price -> product (product_id));
 diesel::joinable!(provider -> address (address_id));
-diesel::joinable!(salary_history -> employee (employee_id));
 diesel::joinable!(user -> address (address_id));
+diesel::joinable!(user -> role (role_id));
 
 diesel::allow_tables_to_appear_in_same_query!(
     address,
-    client,
-    comission_history,
+    client_user,
     employee,
-    payment,
+    producer,
+    product,
+    product_nfe,
+    product_price,
     provider,
-    salary_history,
+    role,
+    unit,
     user,
 );

@@ -1,8 +1,11 @@
 pub mod address;
 pub mod user;
-pub mod salary_history;
-pub mod comission_history;
 pub mod employee;
-pub mod payment;
-pub mod client;
+pub mod client_user;
 pub mod provider;
+pub mod role;
+pub mod unit;
+pub mod producer;
+pub mod product;
+pub mod product_nfe;
+pub mod product_price;

@@ -1,9 +1,0 @@
--- Your SQL goes here
-CREATE TABLE address (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    cep VARCHAR(8) NOT NULL,
-    street VARCHAR(255) NOT NULL,
-    city VARCHAR(255) NOT NULL,
-    state VARCHAR(2) NOT NULL,
-    neighborhood VARCHAR(255) NOT NULL
-);
