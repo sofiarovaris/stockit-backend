@@ -1,5 +1,5 @@
 -- Your SQL goes here
-CREATE TABLE client_user (
+CREATE TABLE IF NOT EXISTS client_user (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     name VARCHAR(255),
     email VARCHAR(255),

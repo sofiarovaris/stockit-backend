@@ -1,5 +1,5 @@
 -- Your SQL goes here
-CREATE TABLE provider (
+CREATE TABLE IF NOT EXISTS provider (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     name VARCHAR(255) NULL,
     company_name VARCHAR(255) NULL,

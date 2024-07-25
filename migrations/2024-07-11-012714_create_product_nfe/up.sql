@@ -1,5 +1,5 @@
 -- Your SQL goes here
-CREATE TABLE product_nfe (
+CREATE TABLE IF NOT EXISTS product_nfe (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     calculation_basis DECIMAL(10, 2) NULL,
     icms_intern DECIMAL(10, 2) NULL,

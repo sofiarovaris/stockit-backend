@@ -31,10 +31,10 @@ pub fn update_employee(conn: &mut SqliteConnection, employee_id: i32, _employee:
         .map_err(|_| "Error updating an employee")
 }
 
-pub fn delete_employee(conn: &mut SqliteConnection, employee_id: i32) -> Result<bool, &'static str> {
+pub fn delete_employee(conn: &mut SqliteConnection, _user_id: i32) -> Result<bool, &'static str> {
     use crate::schema::employee::dsl::*;
 
-    diesel::delete(employee.find(employee_id))
+    diesel::delete(employee.filter(user_id.eq(_user_id)))
         .execute(conn)
         .map(|rows_deleted| rows_deleted == 1)
         .map_err(|_| "Error deleting an employee")

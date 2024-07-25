@@ -127,7 +127,7 @@ diesel::table! {
         rg -> Nullable<Text>,
         cpf -> Nullable<Text>,
         phone -> Nullable<Text>,
-        number -> Nullable<Text>,
+        number -> Nullable<Integer>,
         complement -> Nullable<Text>,
         role_id -> Nullable<Integer>,
         address_id -> Nullable<Integer>,
