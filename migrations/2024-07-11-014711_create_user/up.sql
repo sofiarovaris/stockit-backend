@@ -1,5 +1,5 @@
 -- Your SQL goes here
-CREATE TABLE user (
+CREATE TABLE IF NOT EXISTS user (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     name VARCHAR(255) NULL,
     username VARCHAR(255) NULL,
@@ -8,7 +8,7 @@ CREATE TABLE user (
     rg VARCHAR(255) NULL,
     cpf VARCHAR(255) NULL,
     phone VARCHAR(255) NULL,
-    number VARCHAR(255) NULL,
+    number INTEGER NULL,
     complement VARCHAR(255) NULL,
     role_id INTEGER NULL,
     address_id INTEGER NULL,

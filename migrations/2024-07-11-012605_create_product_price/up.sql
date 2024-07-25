@@ -1,5 +1,5 @@
 -- Your SQL goes here
-CREATE TABLE product_price (
+CREATE TABLE IF NOT EXISTS product_price (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     price_cost DECIMAL(10, 2) NULL,
     sale_price DECIMAL(10, 2) NULL,

@@ -1,5 +1,5 @@
 -- Your SQL goes here
-CREATE TABLE employee (
+CREATE TABLE IF NOT EXISTS employee (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     admission_date DATE NULL,
     payment_date DATE NULL,

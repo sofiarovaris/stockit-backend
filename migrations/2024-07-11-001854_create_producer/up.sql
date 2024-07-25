@@ -1,5 +1,5 @@
 -- Your SQL goes here
-CREATE TABLE producer (
+CREATE TABLE IF NOT EXISTS producer (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     name VARCHAR(255) NOT NULL
 );
